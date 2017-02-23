@@ -6,18 +6,21 @@ var express = require('express')
 /*
  Setando o tamplate das views através
  de variáveis de ambente
- STACK DE CONFIGURAÇÕES DO SERVIDOR
-
-
-app.use(express.static(__dirname + '/public'));
+ STACK DE CONFIGURAÇÕES DO SERVIDORS
 */ 
+//Setando o local onde o app buscará as Views
 app.set('views', __dirname + '/views');
+//Setanto o tamplate engine que será utilizado
 app.set('view engine', 'ejs');
+
+app.use(express.cookieParser('ntalk'));
+app.use(express.session());
+app.use(express.json());
+app.use(express.urlencoded());
+//Midleware de conteúdos estáticos
 app.use(express.static(__dirname + '/public'));
 
-//app.use(express.static(__dirname + '/public'));
-
-
+//Carregando todos os módulos que serão utilizados
 load('models')
  .then('controllers')
  .then('routes')
