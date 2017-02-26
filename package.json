@@ -1,6 +1,7 @@
 {
   "name": "ntalk",
   "description": "Node Talk - Agenda de Contatos",
+  "author": "Matheus Of Araujô Milk", 
   "version": "1.0.0",
   "private": false,
   "scripts": {

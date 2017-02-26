@@ -1,7 +1,10 @@
 // Carregando os Módulos
-var express = require('express')
-  , load    = require("express-load")  
-  , app     = express();
+var express       = require('express')
+  , load          = require("express-load")   
+  , app           = express()
+  , cookieParser  = require('cookie-parser') 
+  , cookieSession = require('cookie-session');
+  
 
 /*
  Setando o tamplate das views através
@@ -12,10 +15,13 @@ var express = require('express')
 app.set('views', __dirname + '/views');
 //Setanto o tamplate engine que será utilizado
 app.set('view engine', 'ejs');
-
-app.use(express.cookieParser('ntalk'));
-app.use(express.session());
+//Midleware gerenciador de cookies
+app.use(cookieParser('ntalk'));
+//Midleware gerenciador de sessão
+app.use(cookieSession());
+//Midleware gerenciador de json
 app.use(express.json());
+//Midleware gerenciador de urls
 app.use(express.urlencoded());
 //Midleware de conteúdos estáticos
 app.use(express.static(__dirname + '/public'));
