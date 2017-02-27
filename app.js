@@ -1,9 +1,10 @@
 // Carregando os Módulos
 var express       = require('express')
-  , load          = require("express-load")   
+  , load          = require('express-load')   
   , app           = express()
   , cookieParser  = require('cookie-parser') 
-  , cookieSession = require('cookie-session');
+  , cookieSession = require('cookie-session')
+  , bodyParser    = require('body-parser');
   
 
 /*
@@ -17,12 +18,17 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 //Midleware gerenciador de cookies
 app.use(cookieParser('ntalk'));
+
 //Midleware gerenciador de sessão
-app.use(cookieSession());
+app.use(cookieSession({
+    secret: 'LOGADO',
+    cookie: { maxAge: 24 * 60 * 60 * 6000 } 
+    
+}))
 //Midleware gerenciador de json
-app.use(express.json());
+app.use(bodyParser.json());
 //Midleware gerenciador de urls
-app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({extended: false}));
 //Midleware de conteúdos estáticos
 app.use(express.static(__dirname + '/public'));
 
